@@ -33,7 +33,7 @@ public class DatabaseHelper {
     static {
         QUERY_RUNNER = new QueryRunner();
         DATA_SOURCE = new DruidDataSource();
-        DATA_SOURCE.configFromPropety(PropsUtil.loadProps("druid-pool.properties"));
+        DATA_SOURCE.configFromPropety(PropsUtil.loadProps("config-test.properties"));
     }
 
     public static Connection getConnection() {
