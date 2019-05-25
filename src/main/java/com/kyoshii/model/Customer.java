@@ -1,4 +1,4 @@
-package com.kyoshii.chapter2.model;
+package com.kyoshii.model;
 
 public class Customer {
     private long id;

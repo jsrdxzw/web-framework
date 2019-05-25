@@ -1,4 +1,4 @@
-package com.kyoshii.chapter2.controller;
+package com.kyoshii.controller;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
