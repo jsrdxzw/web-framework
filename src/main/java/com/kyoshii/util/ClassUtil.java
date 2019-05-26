@@ -1,6 +1,5 @@
 package com.kyoshii.util;
 
-import com.kyoshii.helper.ConfigHelper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -47,9 +46,8 @@ public class ClassUtil {
         return loadClass(className, false);
     }
 
-    public static Set<Class<?>> getClassSet() {
+    public static Set<Class<?>> getClassSet(String packageName) {
         Set<Class<?>> classSet = new HashSet<>();
-        String packageName = ConfigHelper.getAppBasePackage();
         URL url = getClassLoader().getResource(packageName.replace(".", "/"));
         if (url != null) {
             String protocol = url.getProtocol();
@@ -133,11 +131,4 @@ public class ClassUtil {
         classSet.add(aClass);
     }
 
-
-    public static void main(String[] args) {
-        Set<Class<?>> classSet = getClassSet();
-        for (Class<?> aClass : classSet) {
-            System.out.println(aClass);
-        }
-    }
 }
