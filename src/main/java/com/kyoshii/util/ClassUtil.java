@@ -21,7 +21,7 @@ import java.util.jar.JarFile;
  * @Date: 2019-05-25
  * @Description: 类加载器加载配置文件定义的包路径下的所有类
  */
-public class ClassUtil {
+public final class ClassUtil {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(ClassUtil.class);
 

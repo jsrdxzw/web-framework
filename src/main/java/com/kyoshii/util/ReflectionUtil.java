@@ -12,7 +12,7 @@ import java.lang.reflect.Method;
  * @Date: 2019-05-26
  * @Description: 反射工具类
  */
-public class ReflectionUtil {
+public final class ReflectionUtil {
     private static final Logger LOGGER = LoggerFactory.getLogger(ReflectionUtil.class);
 
     /**

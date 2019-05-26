@@ -12,7 +12,7 @@ import java.util.Properties;
  * @Date: 2019-05-25
  * @Description: 专门读取properties文件的工具类
  */
-public class PropsUtil {
+public final class PropsUtil {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(PropsUtil.class);
 
