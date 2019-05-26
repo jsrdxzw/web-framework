@@ -1,5 +1,6 @@
 package com.kyoshii.util;
 
+import com.kyoshii.helper.ConfigHelper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -129,6 +130,13 @@ public class ClassUtil {
     private static void doAddClass(Set<Class<?>> classSet, String className) {
         Class<?> aClass = loadClass(className);
         classSet.add(aClass);
+    }
+
+    public static void main(String[] args) {
+        Set<Class<?>> classSet = getClassSet(ConfigHelper.getAppBasePackage());
+        for (Class<?> aClass : classSet) {
+            System.out.println(aClass.getName());
+        }
     }
 
 }
