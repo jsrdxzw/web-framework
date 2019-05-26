@@ -11,6 +11,7 @@ import java.util.Map;
  */
 public class CustomerService {
 
+
     public List<Customer> getCustomerList() {
         String sql = "select * from customer";
         return DatabaseHelper.queryEntityList(Customer.class, sql);

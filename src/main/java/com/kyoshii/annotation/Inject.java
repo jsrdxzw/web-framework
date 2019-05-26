@@ -10,7 +10,7 @@ import java.lang.annotation.Target;
  * @Date: 2019-05-26
  * @Description:
  */
-@Target(ElementType.TYPE)
+@Target(ElementType.FIELD)
 @Retention(RetentionPolicy.RUNTIME)
 public @interface Inject {
 
