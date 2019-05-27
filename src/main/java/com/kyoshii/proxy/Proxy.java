@@ -7,5 +7,11 @@ package com.kyoshii.proxy;
  */
 public interface Proxy {
 
+    /**
+     * 代理对应的类
+     * @param proxyChain
+     * @return
+     * @throws Throwable
+     */
     Object doProxy(ProxyChain proxyChain) throws Throwable;
 }

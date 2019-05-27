@@ -9,6 +9,7 @@ import org.junit.Test;
 
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class CustomerServiceTest {
     private final CustomerService customerService;
@@ -25,14 +26,18 @@ public class CustomerServiceTest {
 
     @Test
     public void getCustomerListTest() {
-        List<Customer> customerList = customerService.getCustomerList();
-        Assert.assertEquals(2, customerList.size());
+        List<Customer> customers = DatabaseHelper.queryEntityList(Customer.class, "select * from customer");
+        for (Customer customer : customers) {
+            System.out.println(customer);
+        }
+//        List<Customer> customerList = customerService.getCustomerList();
+//        Assert.assertEquals(2, customerList.size());
     }
 
     @Test
-    public void getCustomerTest() {
-        Customer customer = customerService.getCustomer(1);
-        Assert.assertNotNull(customer);
+    public void getCustomerByIdTest() {
+        Customer customer = DatabaseHelper.queryEntity(Customer.class, "select * from customer where id=?", 3);
+        System.out.println(customer);
     }
 
     @Test
@@ -41,21 +46,24 @@ public class CustomerServiceTest {
         fieldMap.put("name", "customer100");
         fieldMap.put("contact", "John");
         fieldMap.put("telephone", "13921697198");
-        boolean result = customerService.createCustomer(fieldMap);
-        Assert.assertTrue(result);
+        DatabaseHelper.insertEntity(Customer.class,fieldMap);
+//        boolean result = customerService.createCustomer(fieldMap);
+//        Assert.assertTrue(result);
     }
 
     @Test
     public void updateCustomerTest() {
-        HashMap<String, Object> fieldMap = new HashMap<>();
-        fieldMap.put("contact", "Eric");
-        boolean result = customerService.updateCustomer(1, fieldMap);
-        Assert.assertTrue(result);
+        Map<String, Object> fieldMap = new HashMap<>();
+        fieldMap.put("email", "Eric@gmail.com");
+        DatabaseHelper.updateEntity(Customer.class,3,fieldMap);
+//        boolean result = customerService.updateCustomer(1, fieldMap);
+//        Assert.assertTrue(result);
     }
 
     @Test
     public void deleteCustomerTest() {
-        boolean result = customerService.deleteCustomer(1);
-        Assert.assertTrue(result);
+        DatabaseHelper.executeDelete(Customer.class,3);
+//        boolean result = customerService.deleteCustomer(1);
+//        Assert.assertTrue(result);
     }
 }
