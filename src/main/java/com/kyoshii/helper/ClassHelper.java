@@ -2,22 +2,26 @@ package com.kyoshii.helper;
 
 import com.kyoshii.annotation.Controller;
 import com.kyoshii.annotation.Service;
+import com.kyoshii.proxy.Proxy;
 import com.kyoshii.util.ClassUtil;
 
 import java.lang.annotation.Annotation;
 import java.util.HashSet;
+import java.util.List;
+import java.util.Map;
 import java.util.Set;
 
 /**
  * @Author: xuzhiwei
  * @Date: 2019-05-26
- * @Description: 类操作助手类
+ * @Description: 类操作助手类,获取需要的Class集合
  */
 public class ClassHelper {
     private static final Set<Class<?>> CLASS_SET;
 
     static {
         String basePackage = ConfigHelper.getAppBasePackage();
+        // 获取的是指定包名下面的所有Class
         CLASS_SET = ClassUtil.getClassSet(basePackage);
     }
 
@@ -82,7 +86,7 @@ public class ClassHelper {
 
     /**
      * 获取带有某注解的所有类
-     * @param annotationClass
+     * @param annotationClass 注解类型
      * @return
      */
     public static Set<Class<?>> getClassSetByAnnotation(Class<? extends Annotation> annotationClass){
@@ -94,4 +98,5 @@ public class ClassHelper {
         }
         return classSet;
     }
+
 }
