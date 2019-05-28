@@ -42,5 +42,14 @@ public class BeanHelper {
         }
     }
 
+    /**
+     * 这里的设置，可以为AOP设置代理类而使用
+     * @param cls
+     * @param object
+     */
+    public static void setBean(Class<?> cls,Object object){
+        BEAN_MAP.put(cls,object);
+    }
+
 
 }

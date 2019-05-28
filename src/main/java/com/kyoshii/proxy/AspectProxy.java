@@ -8,7 +8,7 @@ import java.lang.reflect.Method;
 /**
  * @Author: xuzhiwei
  * @Date: 2019-05-27
- * @Description:
+ * @Description: 由框架创建并放入底层的BeanMap中
  */
 public abstract class AspectProxy implements Proxy {
     private final static Logger LOGGER = LoggerFactory.getLogger(AspectProxy.class);
@@ -48,10 +48,25 @@ public abstract class AspectProxy implements Proxy {
         return true;
     }
 
+
+    /**
+     * 提供给子类的钩子方法
+     *
+     * @param cls
+     * @param method
+     * @param params
+     */
     public void before(Class<?> cls, Method method, Object[] params) {
 
     }
 
+    /**
+     * 提供给子类的钩子方法
+     *
+     * @param cls
+     * @param method
+     * @param result
+     */
     public void after(Class<?> cls, Method method, Object result) {
 
     }
