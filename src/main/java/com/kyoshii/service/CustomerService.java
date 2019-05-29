@@ -1,5 +1,6 @@
 package com.kyoshii.service;
 
+import com.kyoshii.annotation.Service;
 import com.kyoshii.helper.DatabaseHelper;
 import com.kyoshii.model.Customer;
 
@@ -9,6 +10,7 @@ import java.util.Map;
 /**
  * @author xuzhiwei
  */
+@Service
 public class CustomerService {
 
 

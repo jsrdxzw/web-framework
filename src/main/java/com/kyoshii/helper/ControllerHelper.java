@@ -19,6 +19,7 @@ public class ControllerHelper {
 
     // 初始化request和handler的映射关系
     static {
+        System.out.println(123);
         Set<Class<?>> controllerClassSet = ClassHelper.getControllerClassSet();
         if (controllerClassSet != null && !controllerClassSet.isEmpty()) {
             for (Class<?> controllerClass : controllerClassSet) {

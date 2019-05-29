@@ -1,9 +1,6 @@
 package com.kyoshii;
 
-import com.kyoshii.helper.BeanHelper;
-import com.kyoshii.helper.ClassHelper;
-import com.kyoshii.helper.ControllerHelper;
-import com.kyoshii.helper.IocHelper;
+import com.kyoshii.helper.*;
 import com.kyoshii.util.ClassUtil;
 
 /**
@@ -13,9 +10,11 @@ import com.kyoshii.util.ClassUtil;
  */
 public class HelperLoader {
     public static void init() {
-        ClassUtil.loadClass(ClassHelper.class.getName());
-        ClassUtil.loadClass(BeanHelper.class.getName());
-        ClassUtil.loadClass(IocHelper.class.getName());
-        ClassUtil.loadClass(ControllerHelper.class.getName());
+        // 加载类的时候要实例化一下,运行static的代码
+        ClassUtil.loadClass(ClassHelper.class.getName(),true);
+        ClassUtil.loadClass(BeanHelper.class.getName(),true);
+        ClassUtil.loadClass(AopHelper.class.getName(),true);
+        ClassUtil.loadClass(IocHelper.class.getName(),true);
+        ClassUtil.loadClass(ControllerHelper.class.getName(),true);
     }
 }
