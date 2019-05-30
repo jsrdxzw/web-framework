@@ -28,11 +28,13 @@ import java.util.Objects;
 public class DatabaseHelper {
     private static final QueryRunner QUERY_RUNNER;
     private static final DruidDataSource DATA_SOURCE;
+    private static final ThreadLocal<Connection> CONNECTION_HOLDER;
     private static final Logger LOGGER = LoggerFactory.getLogger(DatabaseHelper.class);
 
     static {
         QUERY_RUNNER = new QueryRunner();
         DATA_SOURCE = new DruidDataSource();
+        CONNECTION_HOLDER = new ThreadLocal<>();
         DATA_SOURCE.configFromPropety(PropsUtil.loadProps("config-test.properties"));
     }
 
@@ -40,10 +42,78 @@ public class DatabaseHelper {
         Connection connection = null;
         try {
             connection = DATA_SOURCE.getConnection();
+            CONNECTION_HOLDER.set(connection);
         } catch (SQLException e) {
             LOGGER.error("get connection failure", e);
         }
         return connection;
+    }
+
+    /**
+     * you have no necessary to invoke close method by your hand
+     */
+    @Deprecated()
+    public static void closeConnection() {
+        Connection connection = CONNECTION_HOLDER.get();
+        if (connection != null) {
+            try {
+                connection.close();
+            } catch (SQLException e) {
+                LOGGER.error("close connection failure", e);
+                throw new RuntimeException(e);
+            } finally {
+                CONNECTION_HOLDER.remove();
+            }
+        }
+    }
+
+    /**
+     * 开启事务
+     */
+    public static void beginTransaction() {
+        Connection connection = getConnection();
+        if (connection != null) {
+            try {
+                connection.setAutoCommit(false);
+            } catch (SQLException e) {
+                LOGGER.error("begin transaction failure", e);
+            } finally {
+                CONNECTION_HOLDER.set(connection);
+            }
+        }
+    }
+
+    /**
+     * 提交事务
+     */
+    public static void commitTransaction() {
+        Connection connection = getConnection();
+        if (connection != null) {
+            try {
+                connection.commit();
+                connection.close();
+            } catch (SQLException e) {
+                LOGGER.error("commit transaction failure", e);
+            } finally {
+                CONNECTION_HOLDER.remove();
+            }
+        }
+    }
+
+    /**
+     * 回滚事务
+     */
+    public static void rollbackTransaction() {
+        Connection connection = getConnection();
+        if (connection != null) {
+            try {
+                connection.rollback();
+            } catch (SQLException e) {
+                LOGGER.error("rollback transaction failure", e);
+            } finally {
+                CONNECTION_HOLDER.remove();
+            }
+        }
     }
 
     /**
