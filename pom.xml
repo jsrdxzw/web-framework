@@ -17,7 +17,7 @@
         <mysql.version>8.0.15</mysql.version>
         <commons-dbutils.version>1.7</commons-dbutils.version>
         <druid.version>1.1.16</druid.version>
-        <jackson.version>2.10.0.pr1</jackson.version>
+        <jackson.version>2.13.4.1</jackson.version>
         <cglib-version>3.2.12</cglib-version>
     </properties>
 
